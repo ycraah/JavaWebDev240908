@@ -16,10 +16,11 @@ public enum TodoService {
   INSTANCE;
 
   public void register(TodoDTO todoDTO){
-    log.info("register 메서드 실행");
+    log.info("TodoService register() 실행");
   }
 
   public List<TodoDTO> getList(){
+    log.info("TodoService getList() 실행");
     List<TodoDTO> todoDTOS = IntStream.range(0,10).mapToObj(i -> {
       TodoDTO dto = TodoDTO.builder()
           .tno((long)i)
@@ -32,6 +33,7 @@ public enum TodoService {
   }
 
   public TodoDTO get(Long tno){
+    log.info("TodoService get() 실행");
     TodoDTO dto = TodoDTO.builder()
         .tno(tno)
         .title("sample Todo")
@@ -39,11 +41,5 @@ public enum TodoService {
         .finished(true)
     .build();
     return dto;
-  }
-
-  public String getTime() throws SQLException {
-    TodoDAO dao = new TodoDAO();
-    String now = dao.getTime();
-    return now;
   }
 }
