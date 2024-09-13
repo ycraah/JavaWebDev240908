@@ -61,4 +61,28 @@ public class TodoDAO {
         .build();
     return vo;
   }
+
+  public void deleteOne(Long tno) throws SQLException {
+    String sql = "delete from tbl_todo where tno = ?";
+    @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+    @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    preparedStatement.setLong(1, tno);
+    preparedStatement.executeUpdate();
+
+  }
+
+  public void updateOne(TodoVO todoVO) throws SQLException {
+    String sql = "update tbl_todo set title = ?, dueDate = ?, finished = ? where tno = ?";
+    log.info(sql);
+    @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+    @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    preparedStatement.setString(1, todoVO.getTitle());
+    preparedStatement.setDate(2, Date.valueOf(todoVO.getDueDate()));
+    preparedStatement.setBoolean(3, todoVO.isFinished());
+    preparedStatement.setLong(4, todoVO.getTno());
+    int affectedRows = preparedStatement.executeUpdate(); //업데이트된 row 개수 반환 0이면 오류
+    log.info("Updated rows: " + affectedRows);
+    preparedStatement.executeUpdate();
+
+  }
 }
