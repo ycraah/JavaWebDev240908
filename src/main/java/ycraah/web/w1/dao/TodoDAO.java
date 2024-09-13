@@ -28,18 +28,37 @@ public class TodoDAO {
     String sql = "select * from tbl_todo";
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
     @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
-    @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+    @Cleanup ResultSet rs = preparedStatement.executeQuery();
     List<TodoVO> list = new ArrayList<>();
 
-    while (resultSet.next()) {
+    while (rs.next()) {
       TodoVO vo = TodoVO.builder()
-          .tno(resultSet.getLong("tno"))
-          .title(resultSet.getString("title"))
-          .dueDate(resultSet.getDate("dueDate").toLocalDate())
-          .finished(resultSet.getBoolean("finished"))
+          .tno(rs.getLong("tno"))
+          .title(rs.getString("title"))
+          .dueDate(rs.getDate("dueDate").toLocalDate())
+          .finished(rs.getBoolean("finished"))
           .build();
       list.add(vo);
     }
     return list;
+  }
+
+  public TodoVO selectOne(Long tno) throws SQLException {
+    String sql = "select * from tbl_todo where tno = ?";
+    @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+    @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+    preparedStatement.setLong(1, tno);
+
+    @Cleanup ResultSet rs = preparedStatement.executeQuery();
+
+    rs.next();
+    TodoVO vo = TodoVO.builder()
+        .tno(rs.getLong("tno"))
+        .title(rs.getString("title"))
+        .dueDate(rs.getDate("dueDate").toLocalDate())
+        .finished(rs.getBoolean("finished"))
+        .build();
+    return vo;
   }
 }
