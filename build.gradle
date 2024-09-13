@@ -28,7 +28,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
     // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
-    implementation 'com.mysql:mysql-connector-j:8.2.0'
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'

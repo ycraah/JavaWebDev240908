@@ -1,8 +1,10 @@
 package ycraah.web.w1.service;
 
 import lombok.extern.log4j.Log4j2;
+import ycraah.web.w1.dao.TodoDAO;
 import ycraah.web.w1.dto.TodoDTO;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,5 +39,11 @@ public enum TodoService {
         .finished(true)
     .build();
     return dto;
+  }
+
+  public String getTime() throws SQLException {
+    TodoDAO dao = new TodoDAO();
+    String now = dao.getTime();
+    return now;
   }
 }
