@@ -12,6 +12,13 @@
 </head>
 <body>
     <form action="/todo/register" method="POST">
+        <div>
+            <input type="text" name="title" placeholder="제목을 입력하세요.">
+        </div>
+        <div>
+            <input type="date" name="dueDate">
+        </div>
+        <button type="reset">초기화</button>
         <button type="submit">등록 처리</button>
     </form>
 </body>

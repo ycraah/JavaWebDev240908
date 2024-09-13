@@ -12,7 +12,6 @@ import java.util.List;
 public class TodoDAO {
   //TodoService와 연동되어 DB를 중재하는 클래스
   public void insert(TodoVO vo) throws SQLException {
-    log.info("TodoDAO insert 실행");
     String sql = "insert into tbl_todo(title, dueDate, finished) values(?,?,?)";
 
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
@@ -25,7 +24,6 @@ public class TodoDAO {
   }
 
   public List<TodoVO> selectAll() throws SQLException {
-    log.info("TodoDAO selectAll() 실행");
     String sql = "select * from tbl_todo";
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
     @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -45,7 +43,6 @@ public class TodoDAO {
   }
 
   public TodoVO selectOne(Long tno) throws SQLException {
-    log.info("TodoDAO selectOne() 실행");
     String sql = "select * from tbl_todo where tno = ?";
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
     @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -65,7 +62,6 @@ public class TodoDAO {
   }
 
   public void deleteOne(Long tno) throws SQLException {
-    log.info("TodoDAO deleteOne() 실행");
     String sql = "delete from tbl_todo where tno = ?";
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
     @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -75,7 +71,7 @@ public class TodoDAO {
   }
 
   public void updateOne(TodoVO todoVO) throws SQLException {
-    log.info("TodoVO updateOne() 실행");
+    
     String sql = "update tbl_todo set title = ?, dueDate = ?, finished = ? where tno = ?";
     @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
     @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);

@@ -9,6 +9,8 @@ import ycraah.web.w1.util.MapperUtil;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Log4j2
@@ -25,20 +27,18 @@ public enum TodoService {
   }
 
   public void register(TodoDTO todoDTO) throws SQLException {
-    log.info("TodoService register() 실행");
     TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class); // map(인자로 변환할 인자 소스, 인자로 변환할 타켓 클래스 타입)
 
+    log.info(todoVO);
     dao.insert(todoVO);
   }
 
-  public TodoDTO get(Long tno){
-    log.info("TodoService get() 실행");
-    TodoDTO dto = TodoDTO.builder()
-        .tno(tno)
-        .title("sample Todo")
-        .dueDate(LocalDate.now())
-        .finished(true)
-    .build();
-    return dto;
+  public List<TodoDTO> listAll() throws SQLException {
+    List<TodoVO> voList = dao.selectAll();
+    log.info(voList);
+    List<TodoDTO> dtoList = voList.stream()
+        .map(vo -> modelMapper.map(vo,TodoDTO.class))
+        .collect(Collectors.toList());
+    return dtoList;
   }
 }
