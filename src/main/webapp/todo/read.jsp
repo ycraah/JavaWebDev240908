@@ -11,9 +11,22 @@
     <title>Title</title>
 </head>
 <body>
-    <div>${dto.tno}</div>
-    <div>${dto.title}</div>
-    <div>${dto.dueDate}</div>
-    <div>${dto.finished}</div>
+    <div>
+        <input type="text" name="tno" value="${todoDTO.tno}" readonly>
+    </div>
+    <div>
+        <input type="text" name="title" value="${todoDTO.title}" readonly>
+    </div>
+    <div>
+        <input type="date" name="dueDate" value="${todoDTO.dueDate}">
+    </div>
+    <div>
+        <input type="checkbox" name="finished" ${todoDTO.finished ? "checked" : ""} readonly">
+    </div>
+
+    <div>
+        <a href="/todo/modify?tno=${todoDTO.tno}">수정/삭제</a>
+        <a href="/todo/list">리스트</a>
+    </div>
 </body>
 </html>

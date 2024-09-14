@@ -41,4 +41,11 @@ public enum TodoService {
         .collect(Collectors.toList());
     return dtoList;
   }
+
+  public TodoDTO get(Long tno) throws Exception {
+    log.info("검색 번호: " + tno);
+    TodoVO todoVO = dao.selectOne(tno);
+    TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);
+    return todoDTO;
+  }
 }
