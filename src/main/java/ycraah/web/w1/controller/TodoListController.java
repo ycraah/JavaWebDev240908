@@ -24,7 +24,7 @@ public class TodoListController extends HttpServlet {
       req.getRequestDispatcher("/todo/list.jsp").forward(req, resp);
     } catch (Exception e){
       log.error(e.getMessage());
-      throw new ServletException("list error");
+      throw new ServletException("TodoList(GET) 에러");
     }
 
   }

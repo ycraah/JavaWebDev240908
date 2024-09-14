@@ -21,7 +21,7 @@
         <input type="date" name="dueDate" value="${todoDTO.dueDate}">
     </div>
     <div>
-        <input type="checkbox" name="finished" ${todoDTO.finished ? "checked" : ""} readonly">
+        <input type="checkbox" name="finished" ${todoDTO.finished ? "완료" : "미완료"} readonly">
     </div>
 
     <div>
